@@ -36,7 +36,8 @@ A = ~A
 ## DAA
 
 <pre>
-Decimal Adjust Accumulator to get a correct BCD representation after an arithmetic instruction.
+DAA = Decimal Adjust Accumulator の略。
+直前に実行された算術命令の演算結果を二進化十進数(BCD)に変換する
 
 サイクル: 1
 バイト長: 1
@@ -119,7 +120,7 @@ IMEがクリアされている(0)場合:
 ## STOP
 
 <pre>
-Enter CPU very low power mode. Also used to switch between double and normal speed CPU modes in GBC.
+CPUを省電力モードにする。GBCではCPUの倍速モードのオンオフにも使用する。
 
 サイクル: -
 バイト長: 2
