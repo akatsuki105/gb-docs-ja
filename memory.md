@@ -8,7 +8,7 @@
 A000..BFFF | 8KB | RAM Bank00~NN | バンク切り替え可能な場合も存在, SRAMとも。
 C000..CFFF | 4KB | WRAM(Bank00) | -- 
 D000..DFFF | 4KB | WRAM(Bank01~NN) | GBCではバンク切り替え可能(バンク数はカートリッジに依存)
-E000..FDFF | -- | Echo RAM | c000..ddff のミラー 任天堂はこのアドレスを使うことを禁止しています。
+E000..FDFF | -- | Echo RAM | C000..DDFF のミラー 任天堂はこのアドレスを使うことを禁止しています。
 FE00..FE9F | 160B | OAM | -- 
 FEA0..FEFF | -- | 不使用 | 任天堂はこのアドレスを使うことを禁止しています。
 FF00..FF7F | 128B | IOレジスタ | -- 
@@ -66,7 +66,7 @@ Start     | End       | First appeared | 用途
 `$FF68`   |  `$FF69`  |       CGB      | [BG / OBJ Palettes](<#LCD Color Palettes (CGB only)>)
 `$FF70`   |           |       CGB      | WRAMバンク切り替え
 
-## `FEA0..FEFF` について
+## `0xFEA0..FEFF` について
 
 任天堂はこのアドレス領域を使うことを禁止しています。
 
