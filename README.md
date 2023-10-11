@@ -123,9 +123,9 @@ GameBoy, GameBoyColorについて、技術的な詳細を日本語でまとめ�
 
 ## 関連するレポジトリ
 
-- [gba-docs-ja](https://github.com/pokemium/gba-docs-ja): GameBoy Advanceについて
-- [nds-docs-ja](https://github.com/pokemium/nds-docs-ja): Nintendo DSについて
-- [snes-docs-ja](https://github.com/pokemium/snes-docs-ja): スーパーファミコンについて
+- [gba-docs-ja](https://github.com/akatsuki105/gba-docs-ja): GameBoy Advanceについて
+- [nds-docs-ja](https://github.com/akatsuki105/nds-docs-ja): Nintendo DSについて
+- [snes-docs-ja](https://github.com/akatsuki105/snes-docs-ja): スーパーファミコンについて
 
 ## 参考記事
 

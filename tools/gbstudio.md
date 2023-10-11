@@ -1,7 +1,7 @@
 # GB Studio
 
 ```
-Note: この記事は筆者(pokemium)が昔描いたGBStudioの内部を説明するQiitaの記事を移植したものです。
+Note: この記事は筆者(Akatsuki)が昔描いたGBStudioの内部を説明するQiitaの記事を移植したものです。
 ```
 
 ## 本文
