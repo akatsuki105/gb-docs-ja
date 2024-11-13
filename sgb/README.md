@@ -70,11 +70,19 @@ SGBの機能で、おそらく最も人気があり、印象的な機能は、SG
 
 驚くべきことに、SNESのメモリにプログラムやデータを書き込み、そのプログラムをSNESのCPUを使って実行することも可能です。
 
-## SGB System Clock
+## SGBのクロック周波数
 
-Because the SGB is synchronized to the SNES CPU, the Game Boy system clock is directly chained to the SNES system clock. In result, the Game Boy CPU, video controller, timers, and sound frequencies will be all operated approx 2.4% faster than handheld systems. Basically, this should be no problem, and the game will just run a little bit faster. However sensitive musicians may notice that sound frequencies are a bit too high, programs that support SGB functions may avoid this effect by reducing frequencies of Game Boy sounds when having detected SGB hardware. Also, “PAL version” SNES models which use a 50Hz display refresh rate (rather than 60Hz) result in respectively slower Game Boy timings.
+SGB はSNESのCPUと同期しており、その結果、SGBカートリッジ内のゲームボーイのCPU、PPU、タイマ、およびAPUは、ゲームボーイ実機よりも約2.4%高速に動作します。多くの場合、ゲームが少し速く動作するだけで問題になることはありません。
 
-- NTSC SGB: 21.477 MHz master clock, 4.2955 MHz GB clock, 2.41% fast
-- PAL SGB: 21.281 MHz master clock, 4.2563 MHz GB clock, 1.48% fast
-- NTSC SGB2: Separate 20.972 MHz crystal, correct speed
+ただ、音に敏感な人は、音の高さが少し高すぎることに気づくかもしれません。(GBサウンドに加えて[かんきちくん](https://www.vgmpf.com/Wiki/index.php?title=Kankichi-kun)という任天堂製のSFC用サウンドドライバも一緒に使う場合にわかりやすい)
+
+SGBをサポートするソフトでは、SGBで実行されていることを検出すると、サウンドの周波数を低減することで、この影響を回避できる場合があります。
+
+Also, “PAL version” SNES models which use a 50Hz display refresh rate (rather than 60Hz) result in respectively slower Game Boy timings.
+
+```
+NTSC SGB:  21.477 MHz master clock, 4.2955 MHz GB clock, 2.41% fast
+PAL SGB:   21.281 MHz master clock, 4.2563 MHz GB clock, 1.48% fast
+NTSC SGB2: Separate 20.972 MHz crystal, correct speed
+```
 
