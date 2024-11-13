@@ -4,16 +4,17 @@
 
 ゲームボーイの8つのアクションボタンと方向ボタンは、2x4のマトリクス状に配置されています。アクションボタンは`A`,`B`,`Start`,`Select`のことで、方向ボタンは俗に言う十字キーのことです。
 
-このレジスタのbit5,4に書き込むことで、アクションボタンか方向ボタンかを選択し、bit0-3を読み出します。
+このレジスタのbit4,5に書き込むことで、アクションボタンか方向ボタンかを選択し、bit0-3を読み出します。
 
 ```
-  Bit 0    P10 Input: Right or A        (0=Pressed) (読み取り専用)
-  Bit 1    P11 Input: Left  or B        (0=Pressed) (読み取り専用)
-  Bit 2    P12 Input: Up    or Select   (0=Pressed) (読み取り専用)
-  Bit 3    P13 Input: Down  or Start    (0=Pressed) (読み取り専用)
-  Bit 4    P14 Select Direction buttons (0=Select)
-  Bit 5    P15 Select Action buttons    (0=Select)
-  Bit 6-7  不使用
+  Bit
+  0   R    P10 Input: Right or A        (0=Pressed)
+  1   R    P11 Input: Left  or B        (0=Pressed)
+  2   R    P12 Input: Up    or Select   (0=Pressed)
+  3   R    P13 Input: Down  or Start    (0=Pressed)
+  4   R/W  P14 Select Direction buttons (0=Select)
+  5   R/W  P15 Select Action buttons    (0=Select)
+  6-7 R    不使用
 ```
 
 **注意**
