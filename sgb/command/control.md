@@ -47,7 +47,7 @@ Maybe intended to determine whether SNES operates at 50Hz or 60Hz display refres
 
 ## SGBコマンド $0E - ICON_EN
 
-Used to enable/disable ICON function. Possibly meant to enable/disable SGB/SNES popup menues which might otherwise activated during Game Boy game play. By default all functions are enabled (0).
+"アイコン機能"を有効/無効にするために使用します。おそらく、ゲームボーイのゲームプレイ中に有効になるSGB/SNESのポップアップメニューを有効/無効にすることを意味します。デフォルトでは、すべての機能が有効になっています。
 
 ```
   Byte  Content
@@ -101,11 +101,11 @@ Free Addresses in SNES memory are Bank 0 1800-1FFF, Bank $7F 0000-FFFF. The tran
 
 ## SGBコマンド $12 - JUMP
 
-Used to set the SNES program counter and NMI (vblank interrupt) handler to specific addresses.
+SNESのプログラムカウンタとNMIハンドラを特定のアドレスに設定するためのコマンドです。
 
 ```
   Byte   Content
-  0      Command*8+Length    (fixed length=1)
+  0      0x91; ヘッダ
   1      SNES Program Counter, low
   2      SNES Program Counter, high
   3      SNES Program Counter, bank number
