@@ -1,15 +1,18 @@
 # FF41 - STAT - LCDステータスレジスタ (R/W)
 
 ```
-  Bit 0-1  モード(R)
-  Bit 2    LYC == LY一致フラグ(R)
-  Bit 3    モード0 H-Blank割り込み (1 = 有効)
-  Bit 4    モード1 V-Blank割り込み (1 = 有効)
-  Bit 5    モード2 OAM割り込み (1 = 有効)
-  Bit 6    LYC = LY一致割り込み (1 = 有効)
+  Bit
+  0-1 R   モード
+           0b00: HBlank中
+           0b01: VBlank中
+           0b10: OAMスキャン
+           0b11: 画面描画中
+  2   R   LYC == LY一致フラグ
+  3   R/W モード0 H-Blank割り込み (1 = 有効)
+  4   R/W モード1 V-Blank割り込み (1 = 有効)
+  5   R/W モード2 OAM割り込み (1 = 有効)
+  6   R/W LYC = LY一致割り込み (1 = 有効)
 ```
-
-`STAT.0-1`は現在のPPUの[モード](../mode.md)を表しています。
 
 `STAT.2`は、LYがLYCと同じ値を含む場合にセットされます。このbitはリアルタイムで更新されます。
 
