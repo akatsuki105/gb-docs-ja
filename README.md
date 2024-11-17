@@ -15,7 +15,6 @@ GameBoy, GameBoyColorについて、技術的な詳細を日本語でまとめ�
 ### GB
 
 - [仕様](./spec.md)
-- [ハードウェア一覧](./hardware/README.md)
 - [メモリマップ](./memory.md)
 - [割り込み](./interrupt.md)
 - [タイマー](./timer.md)
