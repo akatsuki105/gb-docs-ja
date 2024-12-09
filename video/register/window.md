@@ -4,13 +4,12 @@
 
 ウィンドウの左上のY座標を指定します。
 
-ウィンドウは、通常の背景より手間に表示されるもう一つの背景領域のようなものです。OBJ は通常の BG と同様にウィンドウの手前、または奥に表示されます。
+```
+  Bit
+  0-7  ウィンドウY座標+7; ウィンドウは (WX-7, WY) から表示される
+```
 
-例えば、下の画像では、メニュー画面(画面下部)にウィンドウを使っています。
-
-<img src="../../images/window.png" alt="window" title="https://wentwayup.tamaliver.jp/e448453.html より引用" width="240" />
-
-XY座標の両方がそれぞれWX=0..166、WY=0..143の範囲にあるときに、ウィンドウが有効(LCDCのbit5)ならウィンドウが画面に表示されます。
+XY座標の両方がそれぞれWX=0..166、WY=0..143の範囲にあるときに、ウィンドウが有効(`LCDC.5`)ならウィンドウが画面に表示されます。
 
 WX=7、WY=0の場合、ウィンドウは画面の左上に配置され、背景を完全に覆います。
 
@@ -24,9 +23,9 @@ WX=7、WY=0の場合、ウィンドウは画面の左上に配置され、背景
 ```
 
 > [!WARNING]
-> WX values 0 and 166 are unreliable due to hardware bugs.  
-> If WX is set to 0, the window will “stutter” horizontally when SCX changes (depending on SCX % 8).  
-> If WX is set to 166, the window will span the entirety of the following scanline.
+> WX が 0 または 166 のときは、ハードウェアのバグにより期待した挙動が得られないことがあります。  
+> WX が 0 のときに、SCX が変更されるとウィンドウが水平にスタッタリングすることがあります。(SCX % 8 に依存)  
+> WX を 166 に設定すると、ウィンドウは次のスキャンライン全体に広がります。
 
 ## 描画中にレジスタを変更したときの挙動
 
