@@ -1,54 +1,69 @@
 # DMA転送(OMA DMA)
 
-このページは[OAM DMA Transfer](https://gbdev.io/pandocs/OAM_DMA_Transfer.html)を翻訳したものです。
-
 HDMAは[別のページ](../../cgb/hdma.md)で説明しています。
-
-## 概要
-
-DMA転送は`Direct Memory Access`転送の略で、CPUを介さずに周辺機器やメモリ間で直接データ転送を行う転送方式です。
 
 ゲームボーイではROMまたはRAMからOAMへのDMA転送が行えます。
 
 ## FF46 - DMA - DMA制御レジスタ (R/W)
 
-このレジスタに書き込むと、ROMまたはRAMからOAMへのDMA転送が開始されます。
-
-このレジスタに書き込まれる値は、転送元アドレスを\$100で割ったものになります。
-
-つまり転送元と転送先は次のようになります。
+このレジスタに書き込むと、ROMまたはRAMから OAMへのDMA転送が開始されます。
 
 ```
-転送元: $XX00-$XX9F ; XX = $00~$DF
-転送先: $FE00-$FE9F
+  Bit
+  0-7  転送元アドレス上位バイト (0x00..DF)
+         このレジスタに0xXXを書き込んだ場合
+           転送元: 0xXX00..XX9F
+           転送先: 0xFE00..FE9F
 ```
 
-転送には 160 [M-cycle](../../cpu/cycle.md) かかります。よって転送にかかる時間は、通常速モードでは152μs、CGB倍速モードでは76μsです。
+転送にかかる時間は160Mサイクルで、通常速モードでは640ドット(1.4ライン), 倍速モードでは320ドット(0.7ライン)です。
 
-DMGでは、この間、CPUはHRAM（`$FF80..FFFE`）のみにアクセスできます。
+## OAM DMA bus conflicts
 
-CGBでは、転送元のメモリ領域で使用しているバスは使用できません。今のところ、CGBのこの点はよく理解されていないので、DMGと同じ動作とすることが推奨されています。
+DMGでは、DMA転送中、CPUはHRAM（`0xFF80..FFFE`）にのみアクセスできます。なのでゲーム側はHRAMにこのレジスタへの書き込み処理と転送が終わるまでビジーウェイトする処理をあらかじめ書いて実行することがほとんどです。
 
-そのためソフトの開発者はDMAを利用する際には、次のような短いプログラムをHRAMにコピーし、このプログラムを使ってHRAM内部から転送を開始し、転送が終了するまで待つ必要があります。
+CGBでは、カートリッジとWRAMは別々のバス上にあります。つまり、CPUはWRAMからの転送中にROMまたはSRAMにアクセスでき、またはROMまたはSRAMからの転送中にWRAMにアクセスできます。しかし、`call`はリターンアドレスをスタックに書き込み、スタックと変数は通常WRAMにあるため、CGBでもDMAが終了するまでHRAMでビジーウェイトすることを推奨します。
 
-```asm
+> 割り込み  
+> An interrupt writes a return address to the stack and fetches the interrupt handler’s instructions from ROM. Thus, it’s critical to prevent interrupts during OAM DMA, especially in a program that uses timer, serial, or joypad interrupts, since they are not synchronized to the LCD. This can be done by executing DMA within the VBlank interrupt handler or through the di instruction.
+
+While an OAM DMA is in progress, the PPU cannot read OAM properly either. Thus, most programs execute DMA during Mode 1, inside or immediately after their VBlank handler. But it is also possible to execute it during display redraw (Modes 2 and 3), allowing to display more than 40 objects on the screen (that is, for example 40 objects in the top half, and other 40 objects in the bottom half of the screen), at the cost of a couple lines that lack objects. If the transfer is started during Mode 3, graphical glitches may happen.
+
+The details:
+- If OAM DMA is active during OAM scan (mode 2), most PPU revisions read each object as being off-screen and thus hidden on that line.
+- If OAM DMA is active during rendering (mode 3), the PPU reads whatever 16-bit word the DMA unit is writing to OAM when the object is fetched. This causes an incorrect tile number and attributes for objects already determined to be in range.
+
+## Best practices
+
+この10バイトのルーチンは転送を開始し、それが終了するまで待ちます。多くのゲームでは、このようなルーチンをHRAMにコピーし、モード1中に呼び出します。
+
+```assembly
 run_dma:
     ld a, HIGH(start address)
     ldh [$FF46], a  ; start DMA transfer (starts right after instruction)
-    ld a, 40        ; delay for a total of 4×40 = 160 cycles
+    ld a, 40        ; delay for a total of 4×40 = 160 M-cycles
 .wait
-    dec a           ; 1 cycle
-    jr nz, .wait    ; 3 cycles
+    dec a           ; 1 M-cycle
+    jr nz, .wait    ; 3 M-cycles
     ret
 ```
 
-(OAM)DMA転送中はスプライトが表示されないため、多くのプログラムではVBlankハンドラ内で上記のコードを実行しています。
+HRAMが不足している場合は次のようにすることでHRAMを5バイト節約できます。(数Mサイクル遅くなります)
 
+```assembly
+run_dma:          ; This part must be in ROM.
+    ld a, HIGH(start address)
+    ld bc, $2846  ; B: wait time; C: LOW($FF46)
+    jp run_dma_tail
+
+
+run_dma_tail:     ; This part must be in HRAM.
+    ldh [c], a
+.wait
+    dec b
+    jr nz, .wait
+    ret z         ; Conditional `ret` is 1 M-cycle slower, which avoids
+                  ; reading from the stack on the last M-cycle of DMA.
 ```
-Note:
 
-ディスプレイの描画中（モード2,3）にDMA転送を実行することも可能で、こうすると40個以上のスプライトを画面に表示することができます（例えば、上半分に40個のスプライト、下半分に40個のスプライト）
-
-しかし、その代償として、数行に渡ってPPUがOAMを\$FFとして読み込むため、スプライトが不足します。また、モード3でOAMのDMA転送が開始されると、グラフィックの不具合が発生する可能性があります。
-```
-
+If starting a mid-frame transfer, wait for Mode 0 first so that the transfer cleanly overlaps Mode 2 on the next two lines, making objects invisible on those lines.
