@@ -32,7 +32,6 @@ GameBoy, GameBoyColorについて、技術的な詳細を日本語でまとめ�
   - [HDMA](./cgb/hdma.md)
   - [VRAMバンク](./cgb/vram_bank.md)
   - [WRAMバンク](./cgb/wram_bank.md)
-  - [倍速モード](./cgb/double_speed.md)
   - [赤外線通信](./cgb/infrared.md)
 - [スーパーゲームボーイ](./sgb/README.md)
   - [SGB機能を利用するには](./sgb/usage.md)
