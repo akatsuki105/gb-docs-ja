@@ -13,7 +13,7 @@ FE00..FE9F | 160B | OAM | --
 FEA0..FEFF | -- | 不使用 | 任天堂はこのアドレスを使うことを禁止しています。
 FF00..FF7F | 128B | IOレジスタ | -- 
 FF80..FFFE | 127B | HRAM(High RAM) | --
-FFFF..FFFF | 1B | IME | -- 
+FFFF..FFFF | 1B | IE | -- 
 
 ## 🗄 ベクタ
 
