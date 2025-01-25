@@ -84,18 +84,6 @@ GameBoy, GameBoyColorについて、技術的な詳細を日本語でまとめ�
 - [ピクセルFIFO](./video/pixel_fifo.md)
 - [VRAM・OAMへのアクセス](./video/access.md)
 
-### カートリッジ
-
-- [カートリッジヘッダ](./cartridge/header.md)
-- [MBC](./cartridge/mbc/README.md)
-  - [MBCなし](./cartridge/mbc/no_mbc.md)
-  - [MBC1](./cartridge/mbc/mbc1.md)
-  - [MBC2](./cartridge/mbc/mbc2.md)
-  - [MBC3](./cartridge/mbc/mbc3.md)
-  - [MBC5](./cartridge/mbc/mbc5.md)
-  - [MBC6](./cartridge/mbc/mbc6.md)
-  - [HuC1](./cartridge/mbc/huc1.md)
-
 ### ツール
 
 - [rgbds](./tools/rgbds/README.md)

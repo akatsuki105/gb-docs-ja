@@ -131,14 +131,14 @@ SGB機能をサポートしていない場合、`0x00`が設定されます。SG
 
 Code | Type
 -----|------
- $00 | ROM ONLY
+ $00 | MBC0
  $01 | MBC1
  $02 | MBC1+RAM
  $03 | MBC1+RAM+BATTERY
  $05 | MBC2
  $06 | MBC2+BATTERY
- $08 | ROM+RAM <sup>[1](#rom_ram)</sup>
- $09 | ROM+RAM+BATTERY <sup>[1](#rom_ram)</sup>
+ $08 | MBC0+RAM <sup>[1](#rom_ram)</sup>
+ $09 | MBC0+RAM+BATTERY <sup>[1](#rom_ram)</sup>
  $0B | MMM01
  $0C | MMM01+RAM
  $0D | MMM01+RAM+BATTERY
