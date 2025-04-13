@@ -205,7 +205,7 @@ to have been a mistake with early homebrew tools and the PD ROMs often don't use
 
 <sup id="2kib_sram">5: 様々な非公式ドキュメントには2KBと記載されています。しかし、2KBのRAMチップがカートリッジに使われたことはありません。これらの値の出典は不明です。</sup>
 
-## 014A - 販売先コード
+## 014A - リージョンコード
 
 このバージョンのゲームが日本で販売されることになっているのか、それ以外の場所で販売されることになっているのかを指定します。2つの値のみが定義されています。
 
