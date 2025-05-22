@@ -36,12 +36,13 @@ TIMAがオーバーフローすると、このレジスタの値にリセット�
 ### FF07 - TAC - Timer制御レジスタ (R/W)
 
 ```
-Bit 0-1 TIMAのクロック
-          00: CPUクロック / 1024 (DMG, SGB2, CGB:   4096 Hz, SGB1:   ~4194 Hz, CGB倍速:   8192 Hz)
-          01: CPUクロック / 16   (DMG, SGB2, CGB: 262144 Hz, SGB1: ~268400 Hz, CGB倍速: 524288 Hz)
-          10: CPUクロック / 64   (DMG, SGB2, CGB:  65536 Hz, SGB1:  ~67110 Hz, CGB倍速: 131072 Hz)
-          11: CPUクロック / 256  (DMG, SGB2, CGB:  16384 Hz, SGB1:  ~16780 Hz, CGB倍速:  32768 Hz)
-Bit 2   タイマー有効フラグ
+  Bit   Expl.
+  0-1   TIMAのクロック
+          0: CPUクロック / 1024 (DMG, SGB2, CGB:   4096 Hz, SGB1:   ~4194 Hz, CGB倍速:   8192 Hz)
+          1: CPUクロック / 16   (DMG, SGB2, CGB: 262144 Hz, SGB1: ~268400 Hz, CGB倍速: 524288 Hz)
+          2: CPUクロック / 64   (DMG, SGB2, CGB:  65536 Hz, SGB1:  ~67110 Hz, CGB倍速: 131072 Hz)
+          3: CPUクロック / 256  (DMG, SGB2, CGB:  16384 Hz, SGB1:  ~16780 Hz, CGB倍速:  32768 Hz)
+  2     タイマー有効フラグ
 ```
 
 CPUクロックは例えばゲームボーイの場合、4194304Hzになります。
