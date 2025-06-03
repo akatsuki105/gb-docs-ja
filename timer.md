@@ -91,7 +91,7 @@ The sentence marked with a (*) has a different behaviour in GBC (AGB and AGS see
 
 ## TIMAオーバーフロー時の挙動
 
-TIMAがオーバーフローすると、TMAからの値がロードされIFのタイマーフラグが1に設定されますが、この現象はTIMAがオーバーフローしてすぐには起こりません。
+TIMAがオーバーフローすると、TMAからの値がロードされIFのタイマーフラグがセットされますが、この現象はTIMAがオーバーフローしてすぐには起こりません。
 
 タイマー割り込みは、TIMAのオーバーフローから1マシンサイクル（4クロックサイクル）遅れます。TMAのTIMAへのリロードも遅れます。
 
